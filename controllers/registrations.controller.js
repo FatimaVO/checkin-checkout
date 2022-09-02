@@ -10,6 +10,7 @@ const getAllRegistrations = async (req, res) => {
         registrations,
       },
     });
+
   } catch (error) {
     console.log(error);
   }
@@ -34,6 +35,7 @@ const getRegistrationById = async (req, res) => {
         registration,
       },
     });
+
   } catch (error) {
     console.log(error);
   }
@@ -49,6 +51,7 @@ const createRegistration = async (req, res) => {
       status: 'success',
       data: { newRegistration },
     });
+
   } catch (error) {
     console.log(error);
   }
@@ -75,12 +78,13 @@ const updateRegistration = async (req, res) => {
     } else if (registration.status === 'cancelled') {
       return res.status(400).json({
         status: 'error',
-        message: 'This registration was canceled',
+        message: 'This registration was cancelled',
       });
     } else {
       await registration.update({ exitTime, status: 'out' });
       res.status(200).json({ status: 'success', data: { registration } });
     }
+
   } catch (error) {
     console.log(error);
   }
@@ -112,6 +116,7 @@ const cancelRegistration = async (req, res) => {
       await registration.update({ status: 'cancelled' });
       res.status(204).json({ status: 'success' });
     }
+    
   } catch (error) {
     console.log(error);
   }
